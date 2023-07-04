@@ -1,0 +1,30 @@
+version: '3'
+volumes:
+  grav:
+    name: grav
+services:
+  grav:
+    volumes:
+      - grav:/config
+    image: lscr.io/linuxserver/grav
+    restart: always
+    container_name: grav
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=YOUR/TIMEZONE
+    networks:
+      - traefik_proxy
+    labels:
+      # Enable traefik
+      - "traefik.enable=true"
+      # Router for GRAV application, only available over HTTPS
+      - "traefik.http.routers.grav-secure.rule=Host(`your.domain`)"
+      - "traefik.http.routers.grav-secure.tls=true"
+      - "traefik.http.routers.grav-secure.tls.certresolver=http"
+      - "traefik.http.routers.grav-secure.middlewares=remove-xpowered"
+      # Service details
+      - "traefik.http.services.grav.loadbalancer.server.port=80"
+networks:
+  traefik_proxy:
+    external: true
