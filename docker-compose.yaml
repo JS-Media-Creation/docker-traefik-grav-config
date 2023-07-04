@@ -19,7 +19,7 @@ services:
       # Enable traefik
       - "traefik.enable=true"
       # Router for GRAV application, only available over HTTPS
-      - "traefik.http.routers.grav-secure.rule=Host(`your.domain`)"
+      - "traefik.http.routers.grav-secure.rule=Host(`your.grav.domain`)"
       - "traefik.http.routers.grav-secure.tls=true"
       - "traefik.http.routers.grav-secure.tls.certresolver=http"
       - "traefik.http.routers.grav-secure.middlewares=remove-xpowered"
