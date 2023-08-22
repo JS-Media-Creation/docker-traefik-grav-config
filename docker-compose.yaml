@@ -13,6 +13,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=YOUR/TIMEZONE
+      # If you want to use the webp plugin
       - DOCKER_MODS=linuxserver/mods:universal-package-install
       - INSTALL_PACKAGES=libwebp-dev|php82-exif|php82-gd
     networks:
